@@ -10,7 +10,7 @@ const RecipeSchema = new Schema({
     type: String,
     required: true
   },
-  descriptions: {
+  description: {
     type: String,
     required: true
   },
@@ -18,7 +18,7 @@ const RecipeSchema = new Schema({
     type: String,
     required: true
   },
-  createDate: {
+  createdDate: {
     type: Date,
     default: Date.now
   },
