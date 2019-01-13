@@ -21,13 +21,13 @@ const schema = makeExecutableSchema({
 
 //MIDDLEWARE IN USE
 const app = express();
-
 //Create GraphQL application
-app.use("/graphql", graphiqlExpress({ endpointURL: "/graphql" }));
+app.use("/graphiql", graphiqlExpress({ endpointURL: "/graphql" }));
 
 //Connect Schemas with graphQL
 app.use(
   "/graphql",
+  bodyParser.json(),
   graphqlExpress({
     schema,
     context: {
