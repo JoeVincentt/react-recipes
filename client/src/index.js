@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import {
   BrowserRouter as Router,
@@ -15,6 +15,10 @@ import App from "./components/App";
 import Signin from "./components/Auth/Signin";
 import Signup from "./components/Auth/Signup";
 import withSession from "./components/withSession";
+import Navbar from "./components/Navbar";
+import Search from "./components/Recipe/Search";
+import AddRecipe from "./components/Recipe/AddRecipe";
+import Profile from "./components/Profile/Profile";
 
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql",
@@ -39,14 +43,20 @@ const client = new ApolloClient({
   }
 });
 
-const Root = ({ refetch }) => (
+const Root = ({ refetch, session }) => (
   <Router>
-    <Switch>
-      <Route exact path="/" component={App} />
-      <Route path="/signin" render={() => <Signin refetch={refetch} />} />
-      <Route path="/signup" render={() => <Signup refetch={refetch} />} />
-      <Redirect to="/" />
-    </Switch>
+    <Fragment>
+      <Navbar session={session} />
+      <Switch>
+        <Route exact path="/" component={App} />
+        <Route path="/search" component={Search} />
+        <Route path="/signin" render={() => <Signin refetch={refetch} />} />
+        <Route path="/signup" render={() => <Signup refetch={refetch} />} />
+        <Route path="/recipe/add" component={AddRecipe} />
+        <Route path="/profile" component={Profile} />
+        <Redirect to="/" />
+      </Switch>
+    </Fragment>
   </Router>
 );
 
