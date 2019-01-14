@@ -4,6 +4,8 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+variables.env
+nodemon.json
 
 # Runtime data
 pids
