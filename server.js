@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 require("dotenv").config({ path: "variables.env" });
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 
 const Recipe = require("./models/Recipe");
 const User = require("./models/User");
@@ -28,6 +29,21 @@ const corsOptions = {
   credentials: true
 };
 app.use(cors(corsOptions));
+
+//Set uop JWT authentication middleware
+app.use(async (req, res, next) => {
+  const token = req.headers["authorization"];
+  if (token !== "null") {
+    try {
+      const currentUser = await jwt.verify(token, process.env.SECRET);
+      console.log(currentUser);
+    } catch (error) {
+      console.log(err);
+    }
+  }
+  next();
+});
+
 //Create GraphQL application
 app.use("/graphiql", graphiqlExpress({ endpointURL: "/graphql" }));
 
