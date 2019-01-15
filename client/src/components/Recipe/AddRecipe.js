@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Mutation } from "react-apollo";
 import { ADD_RECIPE } from "../../queries/index";
 import Error from "../Error";
+import { withRouter } from "react-router-dom";
 
 const initialState = {
   name: "",
@@ -12,7 +13,11 @@ const initialState = {
 };
 
 class AddRecipe extends Component {
-  state = initialState;
+  state = { ...initialState };
+
+  clearState = () => {
+    this.setState({ ...initialState });
+  };
 
   componentDidMount() {
     this.setState({ username: this.props.session.getCurrentUser.username });
@@ -27,7 +32,8 @@ class AddRecipe extends Component {
   handleSubmit = (event, addRecipe) => {
     event.preventDefault();
     addRecipe().then(({ data }) => {
-      console.log(data);
+      this.clearState();
+      this.props.history.push("/");
     });
   };
 
@@ -101,4 +107,4 @@ class AddRecipe extends Component {
   }
 }
 
-export default AddRecipe;
+export default withRouter(AddRecipe);
