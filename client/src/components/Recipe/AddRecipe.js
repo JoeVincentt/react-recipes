@@ -5,6 +5,7 @@ import {
   GET_ALL_RECIPES,
   GET_USER_RECIPES
 } from "../../queries/index";
+import CKEditor from "react-ckeditor-component";
 import Error from "../Error";
 import { withRouter } from "react-router-dom";
 import withAuth from "../withAuth";
@@ -33,6 +34,11 @@ class AddRecipe extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
+  };
+
+  handleEditorChange = event => {
+    const newContent = event.editor.getData();
+    this.setState({ instructions: newContent });
   };
 
   handleSubmit = (event, addRecipe) => {
@@ -125,13 +131,19 @@ class AddRecipe extends Component {
                   onChange={this.handleChange}
                   placeholder="Add description"
                 />
-                <textarea
+                <label htmlFor="instructions">Add instructions</label>
+                <CKEditor
+                  name="instructions"
+                  content={instructions}
+                  events={{ change: this.handleEditorChange }}
+                />
+                {/* <textarea
                   type="text"
                   name="instructions"
                   value={instructions}
                   onChange={this.handleChange}
                   placeholder="Add instructions"
-                />
+                /> */}
                 <button
                   disabled={loading || this.validateForm()}
                   type="submit"
