@@ -40,7 +40,7 @@ class UserRecipes extends Component {
   handleSubmit = (event, updateUserRecipe) => {
     event.preventDefault();
     updateUserRecipe().then(({ data }) => {
-      console.log(data);
+      // console.log(data);
       this.closeModal();
     });
   };
@@ -61,7 +61,7 @@ class UserRecipes extends Component {
         {({ data, loading, error }) => {
           if (loading) return <Spinner />;
           if (error) return <div>Error</div>;
-          console.log(data);
+          // console.log(data);
           return (
             <ul>
               {modal && (
