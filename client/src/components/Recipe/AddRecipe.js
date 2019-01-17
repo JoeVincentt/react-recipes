@@ -99,37 +99,40 @@ class AddRecipe extends Component {
                 className="form"
                 onSubmit={event => this.handleSubmit(event, addRecipe)}
               >
+                <label htmlFor="name">Recipe Name</label>
                 <input
                   type="text"
                   name="name"
-                  placeholder="Recipe Name"
-                  value={name}
+                  placeholder="Add Name"
                   onChange={this.handleChange}
+                  value={name}
                 />
+                <label htmlFor="imageUrl">Recipe Image</label>
                 <input
                   type="text"
                   name="imageUrl"
-                  placeholder="Image URL"
-                  value={imageUrl}
+                  placeholder="Add Image URL"
                   onChange={this.handleChange}
+                  value={imageUrl}
                 />
+                <label htmlFor="category">Category of Recipe</label>
                 <select
                   name="category"
-                  value={category}
                   onChange={this.handleChange}
+                  value={category}
                 >
                   <option value="Breakfast">Breakfast</option>
                   <option value="Lunch">Lunch</option>
                   <option value="Dinner">Dinner</option>
                   <option value="Snack">Snack</option>
                 </select>
-
+                <label htmlFor="description">Recipe Description</label>
                 <input
                   type="text"
                   name="description"
-                  value={description}
+                  placeholder="Add Description"
                   onChange={this.handleChange}
-                  placeholder="Add description"
+                  value={description}
                 />
                 <label htmlFor="instructions">Add instructions</label>
                 <CKEditor
